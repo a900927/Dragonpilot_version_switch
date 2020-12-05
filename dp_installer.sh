@@ -38,10 +38,14 @@ echo "--------------------------------------------------"
 echo "重新查看确认当前分支"
 git branch
 echo "--------------------------------------------------"
-echo "设置语言为中文"
+echo "设置语言时区为中国"
 setprop persist.sys.language zh
 setprop persist.sys.country CN
 setprop persist.sys.timezone Asia/Shanghai
+echo "--------------------------------------------------"
+echo "跳过新手引导"
+echo -n 2 > /data/params/d/HasAcceptedTerms
+echo -n 1 > /data/params/d/HasCompletedSetup
 echo "--------------------------------------------------"
 echo "请手动重启EON或60秒后设备自动重启"
 echo "如需取消重启操作，请按CTRL + C"
