@@ -28,40 +28,44 @@ version=${array[$selected]}
 git clone http://github.com.cnpmjs.org/dragonpilot-community/dragonpilot openpilot -b $version --depth 1
 echo "打开 openpilot 目录"
 cd openpilot
-
+echo "--------------------------------------------------"
 echo "查看全部分支和当前分支"
 git branch -a
-
+echo "--------------------------------------------------"
 echo "切换到目标分支"
 git checkout $version
-
+echo "--------------------------------------------------"
 echo "重新查看确认当前分支"
 git branch
-
+echo "--------------------------------------------------"
 echo "设置语言为中文"
 setprop persist.sys.language zh
 setprop persist.sys.country CN
 setprop persist.sys.timezone Asia/Shanghai
-
+echo "--------------------------------------------------"
 echo "请手动重启EON或60秒后设备自动重启"
 sleep 60
-
+echo "--------------------------------------------------"
 reboot
 }
 
 install_dp(){
+echo "--------------------------------------------------"
 echo "检查当前环境"
 if [ ! -d "/data/openpilot" ]; then
 echo "/data/openpilot目录不存在,判断为界面安装"
+echo "--------------------------------------------------"
 echo "生成/data/data/com.termux/files/continue.sh"
-git_clone
 echo "#!/usr/bin/bash
 cd /data/openpilot
 exec ./launch_openpilot.sh" > /data/data/com.termux/files/continue.sh
 chmod u+x /data/data/com.termux/files/continue.sh
+git_clone
 else
 sys_check
+echo "--------------------------------------------------"
 echo "备份DP目录"
+echo "--------------------------------------------------"
 mv /data/openpilot /data/openpilot_$version&_$backup_time
 git_clone
 fi
