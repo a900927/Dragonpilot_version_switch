@@ -66,7 +66,7 @@ sys_check
 echo "--------------------------------------------------"
 echo "备份DP目录"
 echo "--------------------------------------------------"
-mv /data/openpilot /data/openpilot_$version&_$backup_time
+mv /data/openpilot /data/openpilot_$version_$backup_time
 git_clone
 fi
 }
