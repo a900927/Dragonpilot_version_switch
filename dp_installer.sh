@@ -10,10 +10,10 @@ backup_time=`date +"%Y%m%d%H%M"`
 }
 
 
-curl --insecure https://api.github.com/repos/dragonpilot-community/dragonpilot/branches |grep name |grep :|awk {'print $2'}|sed 's/,//g'|sed 's/\"//g' >./version
+curl https://api.github.com/repos/dragonpilot-community/dragonpilot/branches |grep name |grep :|awk {'print $2'}|sed 's/,//g'|sed 's/\"//g' >/tmp/version
 clear
 #cat ./branches |grep name |grep :|awk {'print $2'} >./version
-array=($(cat ./version))
+array=($(cat /tmp/version))
 echo "--------------------------------------------------"
 echo -e "选择要升级的DP版本"
 echo "--------------------------------------------------"
