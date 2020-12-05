@@ -48,6 +48,7 @@ reboot
 while true; do
 
 read -p "请输入对应数字:" selected
+sleep 10
 echo "选择版本为":"\033[1;34m ${array[$selected]} \033[0m"
 dp_update=true
 break;
