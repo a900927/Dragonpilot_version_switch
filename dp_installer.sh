@@ -8,7 +8,10 @@ cd /data/openpilot
 git branch -a
 backup_time=`date +"%Y%m%d%H%M"`
 }
-
+echo "设置联网检测地址为百度"
+echo "--------------------------------------------------"
+settings put global captive_portal_server www.baidu.com
+echo "--------------------------------------------------"
 
 curl https://api.github.com/repos/dragonpilot-community/dragonpilot/branches |grep name |grep :|awk {'print $2'}|sed 's/,//g'|sed 's/\"//g' >/tmp/version
 clear
@@ -42,6 +45,10 @@ echo "设置语言时区为中国"
 setprop persist.sys.language zh
 setprop persist.sys.country CN
 setprop persist.sys.timezone Asia/Shanghai
+echo "--------------------------------------------------"
+echo "关闭WiFi联网检测"
+settings put global captive_portal_detection_enabled 0
+# 设置联网检测地址为百度 settings put global captive_portal_server www.baidu.com
 echo "--------------------------------------------------"
 echo "跳过新手引导"
 echo -n 2 > /data/params/d/HasAcceptedTerms
