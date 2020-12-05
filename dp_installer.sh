@@ -23,6 +23,7 @@ do
 done
 
 git_clone(){
+cd /data
 version=${array[$selected]}
 git clone http://github.com.cnpmjs.org/dragonpilot-community/dragonpilot openpilot -b $version --depth 1
 echo "打开 openpilot 目录"
@@ -51,7 +52,8 @@ reboot
 install_dp(){
 echo "检查当前环境"
 if [ ! -d "/data/openpilot" ]; then
-echo "/data/openpilot目录不存在,判断为界面安装，生成/data/data/com.termux/files/continue.sh"
+echo "/data/openpilot目录不存在,判断为界面安装"
+echo "生成/data/data/com.termux/files/continue.sh"
 git_clone
 echo "#!/usr/bin/bash
 cd /data/openpilot
@@ -60,8 +62,7 @@ chmod u+x /data/data/com.termux/files/continue.sh
 else
 sys_check
 echo "备份DP目录"
-cd /data
-mv openpilot openpilot_$version&_$backup_time
+mv /data/openpilot /data/openpilot_$version&_$backup_time
 git_clone
 fi
 }
