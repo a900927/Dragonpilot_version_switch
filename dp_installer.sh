@@ -22,10 +22,7 @@ do
     echo -e "\033[41;33m  $i \033[0m" ——\> ${array[i]}
 done
 
-install_dp(){
-echo "备份DP目录"
-cd /data
-mv openpilot openpilot$backup_time
+git_clone(){
 version=${array[$selected]}
 git clone http://github.com.cnpmjs.org/dragonpilot-community/dragonpilot openpilot -b $version --depth 1
 echo "打开 openpilot 目录"
@@ -40,22 +37,44 @@ git checkout $version
 echo "重新查看确认当前分支"
 git branch
 
-echo "请手动重启EON或等待30秒后自动重启设备"
-sleep 30
+echo "设置语言为中文"
+setprop persist.sys.language zh
+setprop persist.sys.country CN
+setprop persist.sys.timezone Asia/Shanghai
+
+echo "请手动重启EON或60秒后设备自动重启"
+sleep 60
+
 reboot
+}
+
+install_dp(){
+echo "检查当前环境"
+if [ ! -d "/data/openpilot" ]; then
+echo "/data/openpilot目录不存在,判断为界面安装，生成/data/data/com.termux/files/continue.sh"
+git_clone
+echo "#!/usr/bin/bash
+cd /data/openpilot
+exec ./launch_openpilot.sh" > /data/data/com.termux/files/continue.sh
+chmod u+x /data/data/com.termux/files/continue.sh
+else
+sys_check
+echo "备份DP目录"
+cd /data
+mv openpilot openpilot$backup_time
+git_clone
+fi
 }
 
 while true; do
 
 read -p "请输入对应数字:" selected
-sleep 10
-echo "选择版本为":"\033[1;34m ${array[$selected]} \033[0m"
+echo "选择版本为 ${array[$selected]}"
 dp_update=true
 break;
 done
 
 if  [[ ${dp_update} == true ]]; then
-	sys_check
 	install_dp
 else
     echo -e "退出升级"
