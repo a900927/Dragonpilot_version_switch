@@ -10,7 +10,7 @@ backup_time=`date +"%Y%m%d%H%M"`
 }
 
 
-curl https://api.github.com/repos/dragonpilot-community/dragonpilot/branches |grep name |grep :|awk {'print $2'}|sed 's/,//g'|sed 's/\"//g' >./version
+curl --insecure https://api.github.com/repos/dragonpilot-community/dragonpilot/branches |grep name |grep :|awk {'print $2'}|sed 's/,//g'|sed 's/\"//g' >./version
 clear
 #cat ./branches |grep name |grep :|awk {'print $2'} >./version
 array=($(cat ./version))
