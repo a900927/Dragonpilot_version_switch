@@ -44,6 +44,7 @@ setprop persist.sys.country CN
 setprop persist.sys.timezone Asia/Shanghai
 echo "--------------------------------------------------"
 echo "请手动重启EON或60秒后设备自动重启"
+echo "如需取消重启操作，请按CTRL + C"
 sleep 60
 echo "--------------------------------------------------"
 reboot
@@ -56,6 +57,7 @@ if [ ! -d "/data/openpilot" ]; then
 echo "/data/openpilot目录不存在,判断为界面安装"
 echo "--------------------------------------------------"
 echo "生成/data/data/com.termux/files/continue.sh"
+echo "--------------------------------------------------"
 echo "#!/usr/bin/bash
 cd /data/openpilot
 exec ./launch_openpilot.sh" > /data/data/com.termux/files/continue.sh
