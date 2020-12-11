@@ -52,8 +52,8 @@ settings put global captive_portal_detection_enabled 0
 echo "--------------------------------------------------"
 echo "跳过新手引导"
 #echo -n 2 > /data/params/d/HasAcceptedTerms
-echo -n 1 > /data/params/d/HasCompletedSetup
-chattr +i /data/params/d/HasCompletedSetup
+#echo -n 1 > /data/params/d/HasCompletedSetup
+#chattr +i /data/params/d/HasCompletedSetup
 echo "--------------------------------------------------"
 echo "请手动重启EON或60秒后设备自动重启"
 echo "如需取消重启操作，请按CTRL + C"
