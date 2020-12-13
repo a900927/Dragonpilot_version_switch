@@ -77,6 +77,7 @@ chmod u+x /data/data/com.termux/files/continue.sh
 git_clone
 else
 sys_check
+rm -rf /runonce
 echo "--------------------------------------------------"
 echo "备份DP目录"
 echo "--------------------------------------------------"
